@@ -30,7 +30,13 @@ $('#btn-words').onclick = () => location.hash = '#/words';
 
 /* ---------- fetching ---------- */
 async function proxied(url, type = 'text') {
-  const r = await fetch('/api/fetch?url=' + encodeURIComponent(url));
+  let r;
+  // Syosetu blocks some Cloudflare egress IPs; a fresh request often lands on a different one.
+  for (let i = 0; i < 6; i++) {
+    r = await fetch('/api/fetch?url=' + encodeURIComponent(url) + (i ? '&retry=' + i : ''));
+    if (r.ok || (r.status !== 403 && r.status < 500)) break;
+    await new Promise(s => setTimeout(s, 300 * i));
+  }
   if (!r.ok) throw new Error(`Syosetu returned ${r.headers.get('X-Upstream-Status') || r.status}`);
   return type === 'json' ? r.json() : r.text();
 }
@@ -257,7 +263,7 @@ window.addEventListener('resize', () => selEl && positionPopup(selEl));
 
 /* ---------- views ---------- */
 function loading(msg) { app.innerHTML = `<div class="spinner">${esc(msg)}<div class="bar-progress"><div id="prog"></div></div></div>`; }
-function errorView(e) { app.innerHTML = `<div class="err"><b>Couldn't load.</b><br>${esc(e.message || e)}</div><p><a href="#/">← Home</a></p>`; }
+function errorView(e) { app.innerHTML = `<div class="err"><b>Couldn't load.</b><br>${esc(e.message || e)}</div><p><button class="primary" onclick="route()">Try again</button> <a href="#/">← Home</a></p>`; }
 function updateWordCount() { $('#word-count').textContent = LS.get('words', []).length; }
 
 async function viewHome() {
