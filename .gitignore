@@ -2,3 +2,6 @@ node_modules
 shots
 shot.mjs
 .wrangler
+font.mjs
+multi.mjs
+cold.mjs

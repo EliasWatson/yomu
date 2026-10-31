@@ -8,10 +8,10 @@ const LS = {
 const app = $('#app');
 
 /* ---------- settings ---------- */
-const settings = Object.assign({ size: 19, furi: true, theme: 'auto', vert: false }, LS.get('settings', {}));
+const settings = Object.assign({ size: 19, furi: true, theme: 'auto', vert: false, font: 'sans' }, LS.get('settings', {}));
 function applySettings() {
   document.documentElement.style.setProperty('--fs', settings.size + 'px');
-  document.documentElement.dataset.theme = settings.theme;
+  document.documentElement.dataset.theme = settings.theme; document.documentElement.dataset.font = settings.font; $('#set-font').value = settings.font;
   document.body.classList.toggle('nofuri', !settings.furi);
   document.body.classList.toggle('vert', settings.vert);
   $('#set-size').value = settings.size; $('#set-furi').checked = settings.furi;
@@ -23,6 +23,7 @@ function applySettings() {
 $('#set-size').oninput = e => { settings.size = +e.target.value; applySettings(); };
 $('#set-furi').onchange = e => { settings.furi = e.target.checked; applySettings(); };
 $('#set-theme').onchange = e => { settings.theme = e.target.value; applySettings(); };
+$('#set-font').onchange = e => { settings.font = e.target.value; applySettings(); };
 $('#set-vert').onchange = e => { settings.vert = e.target.checked; applySettings(); };
 $('#btn-settings').onclick = e => { e.stopPropagation(); $('#settings').classList.toggle('hidden'); };
 document.addEventListener('click', e => { if (!e.target.closest('#settings,#btn-settings')) $('#settings').classList.add('hidden'); });

@@ -5,6 +5,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="theme-color" content="#faf7f0">
 <title>Yomu · 読む</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700&family=Noto+Serif+JP:wght@400;700&display=swap">
 <link rel="stylesheet" href="/style.css">
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>読</text></svg>">
 </head>
@@ -19,6 +21,7 @@
 <div id="settings" class="panel hidden">
   <label>Text size <input type="range" id="set-size" min="14" max="30" step="1"></label>
   <label><input type="checkbox" id="set-furi"> Furigana</label>
+  <label>Font <select id="set-font"><option value="sans">Sans (Noto Sans JP)</option><option value="serif">Mincho / serif (Noto Serif JP)</option><option value="system">System</option></select></label>
   <label>Theme <select id="set-theme"><option value="auto">Auto</option><option value="light">Light</option><option value="sepia">Sepia</option><option value="dark">Dark</option></select></label>
   <label><input type="checkbox" id="set-vert"> Vertical text (縦書き)</label>
 </div>
@@ -26,7 +29,7 @@
 <div id="popup" class="hidden" role="dialog"></div>
 <footer id="credits">
   Dictionary: <a href="https://www.edrdg.org/wiki/index.php/JMdict-EDICT_Dictionary_Project" target="_blank" rel="noopener">JMdict</a> © <a href="https://www.edrdg.org/" target="_blank" rel="noopener">EDRDG</a>, used under <a href="https://www.edrdg.org/edrdg/licence.html" target="_blank" rel="noopener">CC BY-SA 4.0</a> (via jmdict-simplified).
-  Tokenizer: <a href="https://github.com/takuyaa/kuromoji.js" target="_blank" rel="noopener">kuromoji.js</a> (Apache-2.0) with IPADIC.
+  Fonts: Noto Sans/Serif JP (SIL OFL) via Google Fonts. Tokenizer: <a href="https://github.com/takuyaa/kuromoji.js" target="_blank" rel="noopener">kuromoji.js</a> (Apache-2.0) with IPADIC.
   Novels © their authors, loaded live from <a href="https://syosetu.com" target="_blank" rel="noopener">小説家になろう</a>. Yomu is unofficial and not affiliated with Hina Project.
   <a href="https://github.com/EliasWatson/yomu" target="_blank" rel="noopener">Source</a>
 </footer>
